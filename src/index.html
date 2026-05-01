@@ -9,26 +9,77 @@
   <body class="bg-zinc-900 text-white">
     <div class="flex h-screen">
       <!-- SIDEBAR -->
-      <aside class="w-64 bg-zinc-800 p-5">
-        <h2 class="text-2xl font-bold mb-10">Timetable</h2>
+      <aside class="w-64 bg-zinc-800 p-5 flex flex-col justify-between">
+        <div>
+          <h2 class="text-2xl font-bold mb-10">Timetable</h2>
 
-        <nav class="space-y-4">
-          <a href="#" class="block hover:text-blue-400">Dashboard</a>
-          <a href="#" class="block hover:text-blue-400">Agendamentos</a>
-          <a href="#" class="block hover:text-blue-400">Clientes</a>
-        </nav>
+          <nav class="space-y-3">
+            <a
+              href="#"
+              class="flex items-center gap-3 p-2 rounded-lg hover:bg-zinc-700 transition"
+            >
+              📊 <span>Dashboard</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 p-2 rounded-lg hover:bg-zinc-700 transition"
+            >
+              📅 <span>Agendamentos</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 p-2 rounded-lg hover:bg-zinc-700 transition"
+            >
+              👤 <span>Clientes</span>
+            </a>
+          </nav>
+        </div>
+
+        <div>
+          <button
+            class="w-full p-2 bg-red-500 rounded-lg hover:bg-red-600 transition cursor-pointer"
+          >
+            Sair
+          </button>
+        </div>
       </aside>
 
       <!-- Conteúdo Principal -->
       <div class="flex-1 flex flex-col">
         <!-- Header -->
-        <header class="h-16 bg-zinc-800 flex items-center px-6">
-          <h1 class="text-lg">Dashboard</h1>
+        <header class="h-16 bg-zinc-800 flex items-center justify-between px-6">
+          <h1 class="text-lg font-semibold">Dashboard</h1>
+
+          <div class="flex items-center gap-4">
+            <!-- Barra de Busca -->
+            <input
+              type="text"
+              placeholder="Buscar..."
+              class="bg-zinc-700 px-3 py-1 rounded-lg outline-none"
+            />
+
+            <!-- Usuário -->
+            <div class="w-8 h-8 bg-zinc-600 rounded-full"></div>
+          </div>
         </header>
 
         <!-- Main -->
         <main class="p-6">
           <h2 class="text-2xl font-semibold">Bem vindo</h2>
+          <div class="grid grid-cols-3 gap-6 mt-6">
+            <div class="bg-zinc-800 p-5 rounded-xl">
+              <p class="text-zinc-400">Agendamentos hoje</p>
+              <h3 class="text-2x1 font-bold mt-2">12</h3>
+            </div>
+            <div class="bg-zinc-800 p-5 rounded-xl">
+              <p class="text-zinc-400">Clientes ativos</p>
+              <h3 class="text-2x1 font-bold mt-2">48</h3>
+            </div>
+            <div class="bg-zinc-800 p-5 rounded-xl">
+              <p class="text-zinc-400">Faturamento</p>
+              <h3 class="text-2x1 font-bold mt-2">R$2.300</h3>
+            </div>
+          </div>
         </main>
       </div>
     </div>
