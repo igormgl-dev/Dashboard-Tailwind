@@ -9,14 +9,39 @@
   <body class="bg-zinc-900 text-white">
     <div class="flex h-screen">
       <!-- SIDEBAR -->
-      <aside class="w-64 bg-zinc-800 p-5">
-        <h2 class="text-2xl font-bold mb-10">Timetable</h2>
+      <aside class="w-64 bg-zinc-800 p-5 flex flex-col justify-between">
+        <div>
+          <h2 class="text-2xl font-bold mb-10">Timetable</h2>
 
-        <nav class="space-y-4">
-          <a href="#" class="block hover:text-blue-400">Dashboard</a>
-          <a href="#" class="block hover:text-blue-400">Agendamentos</a>
-          <a href="#" class="block hover:text-blue-400">Clientes</a>
-        </nav>
+          <nav class="space-y-3">
+            <a
+              href="#"
+              class="flex items-center gap-3 p-2 rounded-lg hover:bg-zinc-700 transition"
+            >
+              📊 <span>Dashboard</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 p-2 rounded-lg hover:bg-zinc-700 transition"
+            >
+              📅 <span>Agendamentos</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 p-2 rounded-lg hover:bg-zinc-700 transition"
+            >
+              👤 <span>Clientes</span>
+            </a>
+          </nav>
+        </div>
+
+        <div>
+          <button
+            class="w-full p-2 bg-red-500 rounded-lg hover:bg-red-600 transition cursor-pointer"
+          >
+            Sair
+          </button>
+        </div>
       </aside>
 
       <!-- Conteúdo Principal -->
