@@ -83,9 +83,18 @@
             </div>
           </div>
 
+          <div class="flex justify-end mb-6 mt-6">
+            <button
+              onclick="openModal()"
+              class="bg-blue-600 px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+            >
+              + Novo Agendamento
+            </button>
+          </div>
+
           <!-- Tabela de Agendamentos -->
 
-          <div class="mt-10 bg-zinc-800 p-6 rounded-xl">
+          <div class="mt-5 bg-zinc-800 p-6 rounded-xl">
             <h2 class="text-xl font-semibold mb-6">Agendamentos Recentes</h2>
             <table class="w-full text-left">
               <thead>
@@ -139,5 +148,65 @@
         </main>
       </div>
     </div>
+
+    <!-- Modal -->
+
+    <div
+      id="modal"
+      class="hidden fixed inset-0 bg-black/50 items-center justify-center"
+    >
+      <div class="bg-zinc-800 p-6 rounded-xl w-96">
+        <h2 class="text-xl font-semibold mb-4">Novo Agendamento</h2>
+
+        <form action="#" class="space-y-4">
+          <input
+            type="text"
+            placeholder="Nome do cliente"
+            class="w-full p-2 bg-zinc-700 rounded-xl outline-none"
+          />
+          <input
+            type="text"
+            placeholder="Serviço"
+            class="w-full p-2 bg-zinc-700 rounded-xl outline-none"
+          />
+          <input
+            type="date"
+            class="w-full p-2 bg-zinc-700 rounded-xl outline-none"
+          />
+
+          <div class="flex justify-end gap-3 mt-4">
+            <button
+              type="button"
+              onclick="closeModal()"
+              class="px-4 py-2 bg-zinc-600 rounded-lg hover:bg-zinc-700"
+            >
+              Cancelar
+            </button>
+
+            <button
+              type="submit"
+              class="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700"
+            >
+              Salvar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      function openModal() {
+        const modal = document.getElementById("modal");
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("modal");
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+    </script>
   </body>
 </html>
