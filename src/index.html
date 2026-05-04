@@ -153,9 +153,13 @@
 
     <div
       id="modal"
+      onclick="handleOutsideClick(event)"
       class="hidden fixed inset-0 bg-black/50 items-center justify-center"
     >
-      <div class="bg-zinc-800 p-6 rounded-xl w-96">
+      <div
+        onclick="event.stopPropagation()"
+        class="bg-zinc-800 p-6 rounded-xl w-96"
+      >
         <h2 class="text-xl font-semibold mb-4">Novo Agendamento</h2>
 
         <form action="#" class="space-y-4">
@@ -194,7 +198,8 @@
       </div>
     </div>
 
-    <!-- JavaScript -->
+    <!-- JavaScript Modal -->
+
     <script>
       function openModal() {
         const modal = document.getElementById("modal");
@@ -206,6 +211,14 @@
         const modal = document.getElementById("modal");
         modal.classList.add("hidden");
         modal.classList.remove("flex");
+      }
+
+      function handleOutsideClick(event) {
+        const modal = document.getElementById("modal");
+
+        if (event.target === modal) {
+          closeModal();
+        }
       }
     </script>
   </body>
