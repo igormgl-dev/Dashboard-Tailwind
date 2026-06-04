@@ -1,3 +1,7 @@
+// Local Storage
+
+let appointments = [];
+
 // Modal functions
 
 function openModal() {
@@ -20,12 +24,45 @@ function handleOutsideClick(event) {
   }
 }
 
-// Appointment functions
+// Render Appointment
+
+function renderAppointment(appointment) {
+  const table = document.getElementById("appointmentsTable");
+
+  let statusClass = "";
+  let statusText = "";
+
+  if (appointment.status === "confirmado") {
+    statusClass = "bg-green-500/20 text-green-400";
+    statusText = "Confirmado";
+  } else if (appointment.status === "pendente") {
+    statusClass = "bg-yellow-500/20 text-yellow-400";
+    statusText = "Pendente";
+  } else {
+    statusClass = "bg-red-500/20 text-red-400";
+    statusText = "Cancelado";
+  }
+
+  const newRow = document.createElement("tr");
+  newRow.classList.add("border-b", "border-zinc-700");
+
+  newRow.innerHTML = `
+<td class="py-3">${appointment.client}</td>
+<td class="py-3">${appointment.service}</td>
+<td class="py-3">${appointment.date}</td>
+<td>
+<span class="${statusClass} px-3 py-1 rounded-lg text-sm">${statusText}</span>
+</td>
+`;
+
+  table.appendChild(newRow);
+}
+
+// Add appointment
 
 function addAppointment(event) {
   event.preventDefault();
 
-  //   Valores
   const client = document.getElementById("client").value;
   const service = document.getElementById("service").value;
   const rawDate = document.getElementById("date").value;
@@ -33,45 +70,37 @@ function addAppointment(event) {
   const [year, month, day] = rawDate.split("-");
   const date = `${day}/${month}/${year}`;
 
-  let statusClass = "";
-  let statusText = "";
+  const appointment = {
+    client,
+    service,
+    date,
+    status,
+  };
 
-  if (status === "confirmado") {
-    statusClass = "bg-green-500/20 text-green-400";
-    statusText = "Confirmado";
-  } else if (status === "pendente") {
-    statusClass = "bg-yellow-500/20 text-yellow-400";
-    statusText = "Pendente";
-  } else if (status === "cancelado") {
-    statusClass = "bg-red-500/20 text-red-400";
-    statusText = "Cancelado";
-  }
-
-  //   Tabela
-  const table = document.getElementById("appointmentsTable");
-
-  //   Linha
-  const newRow = document.createElement("tr");
-  newRow.classList.add("border-b", "border-zinc-700");
-
-  //   Conteúdo da Linha
-  newRow.innerHTML = `
-<td class="py-3">${client}</td>
-<td class="py-3">${service}</td>
-<td class="py-3">${date}</td>
-<td>
-<span class="${statusClass} px-3 py-1 rounded-lg text-sm">${statusText}</span>
-</td>
-`;
-
-  // Adicionar linha à tabela
-  table.appendChild(newRow);
-
-  //   Limpar formulário
-  document.getElementById("client").value = "";
-  document.getElementById("service").value = "";
-  document.getElementById("date").value = "";
-
-  // Fechar modal
-  closeModal();
+  appointments.push(appointment);
+  localStorage.setItem("appointments", JSON.stringify(appointments));
+  renderAppointment(appointment);
 }
+
+// Clear form
+
+document.getElementById("client").value = "";
+document.getElementById("service").value = "";
+document.getElementById("date").value = "";
+document.getElementById("status").value = "confirmado";
+
+closeModal();
+
+// Load appointments
+
+window.onload = function () {
+  const savedAppointments = localStorage.getItem("appointments");
+
+  if (savedAppointments) {
+    appointments = JSON.parse(savedAppointments);
+
+    appointments.forEach((appointment) => {
+      renderAppointment(appointment);
+    });
+  }
+};
