@@ -53,6 +53,7 @@ function renderAppointment(appointment) {
 <td>
 <span class="${statusClass} px-3 py-1 rounded-lg text-sm">${statusText}</span>
 </td>
+<td><button onclick="deleteAppointment(${appointment.id})">🗑️</button></td>
 `;
 
   table.appendChild(newRow);
@@ -71,6 +72,7 @@ function addAppointment(event) {
   const date = `${day}/${month}/${year}`;
 
   const appointment = {
+    id: Date.now(),
     client,
     service,
     date,
@@ -93,6 +95,16 @@ closeModal();
 
 // Load appointments
 
+function renderAllAppointments() {
+  const table = document.getElementById("appointmentsTable");
+
+  table.innerHTML = "";
+
+  appointments.forEach((appointment) => {
+    renderAppointment(appointment);
+  });
+}
+
 window.onload = function () {
   const savedAppointments = localStorage.getItem("appointments");
 
@@ -104,3 +116,15 @@ window.onload = function () {
     });
   }
 };
+
+// Delete appointment
+
+function deleteAppointment(id) {
+  const confirmDelete = confirm("Deseja excluir este agendamento?");
+  if (!confirmDelete) return;
+
+  appointments = appointments.filter((appointment) => appointment.id !== id);
+  localStorage.setItem("appointments", JSON.stringify(appointments));
+  console.log(appointments);
+  renderAllAppointments();
+}
